@@ -1,10 +1,12 @@
-import Accordion from "./Accordion";
+import Accordion from './Accordion';
 
 function Bellow({
   data = [],
-  filterKeyword = "",
+  filterKeyword = '',
   isOpen = false,
   underline = true,
+  showWordCount = false,
+  onClick = () => {},
 }) {
   return (
     <div className="border-2 border-zinc-600 rounded-lg">
@@ -19,6 +21,8 @@ function Bellow({
             description={d.description}
             isOpen={isOpen}
             underline={underline}
+            showWordCount={showWordCount}
+            onClick={onClick}
           />
         ))}
     </div>
