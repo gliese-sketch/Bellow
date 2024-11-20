@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Accordion({
   title = 'Title',
@@ -8,6 +8,22 @@ function Accordion({
   showWordCount = false,
   onClick = () => {},
 }) {
+  const [readTime, setReadTime] = useState(0);
+
+  useEffect(() => {
+    fetch('https://wakati.wofad91300.workers.dev/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        text: description,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => setReadTime(data.seconds));
+  });
+
   return (
     <details
       className="w-80 bg-stone-100 m-1 p-2 rounded"
@@ -17,7 +33,7 @@ function Accordion({
       <summary className={`cursor-pointer font-bold text-stone-900`}>
         <span className={`${underline && 'hover:underline'}`}>{title}</span>
         <span className="font-normal text-zinc-600 text-sm ml-3">
-          {showWordCount && `${description.split(' ').length} words`}
+          {showWordCount && `${readTime} seconds`}
         </span>
       </summary>
       <p className="text-stone-800">{description}</p>
