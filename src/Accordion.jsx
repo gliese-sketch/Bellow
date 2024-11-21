@@ -7,6 +7,7 @@ function Accordion({
   underline = true,
   showWordCount = false,
   onClick = () => {},
+  setLastClicked,
 }) {
   const [count, setCount] = useState(0);
 
@@ -33,7 +34,10 @@ function Accordion({
     <details
       className="w-80 bg-stone-100 m-1 p-2 rounded"
       open={isOpen}
-      onClick={() => onClick(title)}
+      onClick={() => {
+        onClick(title);
+        setLastClicked(title);
+      }}
     >
       <summary className={`cursor-pointer font-bold text-stone-900`}>
         <span className={`${underline && 'hover:underline'}`}>{title}</span>
