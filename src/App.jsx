@@ -10,7 +10,7 @@ function App() {
         isOpen={false}
         underline={true}
         showWordCount
-        onClick={(value) => console.log(value)}
+        // onClick={(value) => console.log(value)}
       />
     </div>
   );
